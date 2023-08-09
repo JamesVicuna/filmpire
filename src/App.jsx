@@ -6,7 +6,7 @@ import useStyles from './styles'
 
 function App() {
   const classes = useStyles();
-x
+
   return (
     <div className={classes.root}>
       <NavBar />
@@ -16,7 +16,6 @@ x
         <Routes>
           <Route path="/" element={<h1>hello</h1>} />
         </Routes>
-
       </main>
     </div>
   )
