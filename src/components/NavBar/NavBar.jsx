@@ -1,31 +1,37 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
 import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import useStyles from './styles'
 import { useTheme } from '@mui/material/styles';
+import { Sidebar } from '..'
 
 const NavBar = () => {
+  const [mobileOpen, setMobileOpen] = useState(false)
   const classes = useStyles();
   const isMobile = useMediaQuery('(max-width: 600px)');
   const themes = useTheme();
-  const isAuthenticated = '';
+  const isAuthenticated = true;
 
   return (
     <> 
       <AppBar position='fixed'>
         <Toolbar className={classes.toolbar}>
           {isMobile && (
+            // Mobile - Menu Button
             <IconButton 
               color='inherit'
               edge='start'
               style={{outline: 'none'}}
-              onClick={() => {}}
+              onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               className={classes.menuButton}
             >
+            {/* Mobile - Menu */}
               <Menu />
             </IconButton>
           )}
+
+          {/* Dark / Light Mode Button */}
           <IconButton
             color='inherit'
             sx={{ ml: 1}}
@@ -33,13 +39,19 @@ const NavBar = () => {
           >
             {themes.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
+
+          {/* Web Search Bar */}
           {!isMobile && 'Search...'}
+
+          {/* Login / Profile Buttons */}
           <div>
             {!isAuthenticated ? (
+              // Login Button 
               <Button color='inherit' onClick={() => {}}>
                 Login &nbsp; <AccountCircle />
               </Button>
             ): (
+               // Profile Button
               <Button 
                 color='inherit' 
                 component={Link} 
@@ -48,6 +60,7 @@ const NavBar = () => {
                 onClick={() => {}}
               >
                 {!isMobile && <>My Movies &nbsp;</>}
+                {/* User Avatar */}
                 <Avatar 
                   style={{width: 30, 
                   height: 30}} 
@@ -59,6 +72,30 @@ const NavBar = () => {
           {isMobile && 'Search...'}
         </Toolbar>
       </AppBar>
+      <div>
+        <nav className={classes.drawer}>
+          {isMobile 
+          ? (
+            // Mobile Drawer
+            <Drawer 
+              variant='temporary'
+              anchor='left'
+              open={mobileOpen}
+              onClose={() => setMobileOpen((previousMobileOpen) => !previousMobileOpen )}
+              classes={{ paper: classes.drawerPaper }}
+              ModalProps={{ keepMounted: true}}
+            >
+              <Sidebar setMobileOpen={setMobileOpen} />
+            </Drawer>
+          ): (
+            // Web Drawer
+            <Drawer classes={{paper: classes.drawerPaper}} variant='permanent' open>
+              <Sidebar setMobileOpen={setMobileOpen} />
+            </Drawer>
+
+          )}
+        </nav>
+      </div>
 
     </>
   )
