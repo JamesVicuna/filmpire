@@ -7,10 +7,10 @@ import { useTheme } from '@mui/material/styles';
 import { Sidebar } from '..'
 
 const NavBar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false)
   const classes = useStyles();
-  const isMobile = useMediaQuery('(max-width: 600px)');
   const themes = useTheme();
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const isMobile = useMediaQuery('(max-width: 600px)');
   const isAuthenticated = true;
 
   return (
@@ -89,14 +89,18 @@ const NavBar = () => {
             </Drawer>
           ): (
             // Web Drawer
-            <Drawer classes={{paper: classes.drawerPaper}} variant='permanent' open>
+            <Drawer 
+              classes={{paper: classes.drawerPaper}} 
+              className={classes.test} 
+              variant='permanent' 
+              open
+              anchor='left'
+            >
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
-
           )}
         </nav>
       </div>
-
     </>
   )
 }

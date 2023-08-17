@@ -7,7 +7,7 @@ const useStyles = makeStyles((themes) => ({
         height: '80px',
         display: 'flex',
         justifyContent: 'space-between',
-        marginLeft: '240px',
+        marginLeft: '10px',
         [themes.breakpoints.down('sm')]: {
             marginLeft: 0,
             flexWrap: 'wrap',
@@ -23,7 +23,7 @@ const useStyles = makeStyles((themes) => ({
         [themes.breakpoints.up('sm')] : {
             width: drawerWidth,
             flexShrink : 0,
-        }
+        },
     },
     drawerPaper: {
         width: drawerWidth,
@@ -33,7 +33,7 @@ const useStyles = makeStyles((themes) => ({
             color: 'white !important',
             textDecoration: 'none'
         }
-    }
+    },
 }))
 
 

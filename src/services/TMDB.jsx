@@ -4,7 +4,7 @@ const tmdbApiKey = import.meta.env.VITE_REACT_APP_TMDB_KEY;
 // using VITE - have to use import.meta.env to access .env file 
 // TO ACCESS ENV FILE :
 //      createReactApp - process.env 
-//      VITE - improt.meta.env 
+//      VITE - improt.meta.env
 
 const page = 1;
 // https://api.themoviedb.org/3/movie/popular

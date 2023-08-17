@@ -1,4 +1,3 @@
-import './App.css'
 import { CssBaseline } from '@mui/material'
 import { Route, Routes } from 'react-router-dom'
 import { Actors, MovieInformation, Movies, NavBar, Profile } from './components'
