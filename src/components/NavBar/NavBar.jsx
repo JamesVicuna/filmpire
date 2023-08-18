@@ -38,6 +38,7 @@ const NavBar = () => {
             onClick={() => {}}
           >
             {themes.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+            
           </IconButton>
 
           {/* Web Search Bar */}
@@ -94,7 +95,6 @@ const NavBar = () => {
               className={classes.test} 
               variant='permanent' 
               open
-              anchor='left'
             >
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>

@@ -7,7 +7,7 @@ const useStyles = makeStyles((themes) => ({
         height: '80px',
         display: 'flex',
         justifyContent: 'space-between',
-        marginLeft: '10px',
+        marginLeft: '240px',
         [themes.breakpoints.down('sm')]: {
             marginLeft: 0,
             flexWrap: 'wrap',

@@ -7,12 +7,21 @@ const tmdbApiKey = import.meta.env.VITE_REACT_APP_TMDB_KEY;
 //      VITE - improt.meta.env
 
 const page = 1;
-// https://api.themoviedb.org/3/movie/popular
+
+// API DOCS
+//* https://developer.themoviedb.org/docs
 
 export const tmdbApi = createApi({
     reducerPath: 'tmbdApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3' }),
     endpoints: (builder) => ({
+
+        //* Get Genres
+        getGenres: builder.query({
+            query: () => `genre/movie/list?api_key=${tmdbApiKey}`
+        }),
+
+        //* Get Movies by [Type]
         getMovies: builder.query({
             query: () => `movie/popular?page=${page}&api_key=${tmdbApiKey}`,
         })
@@ -22,4 +31,5 @@ export const tmdbApi = createApi({
 
 export const {
     useGetMoviesQuery,
+    useGetGenresQuery,
 } = tmdbApi;
