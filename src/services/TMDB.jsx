@@ -6,8 +6,6 @@ const tmdbApiKey = import.meta.env.VITE_REACT_APP_TMDB_KEY;
 //      createReactApp - process.env 
 //      VITE - improt.meta.env
 
-const page = 1;
-
 // API DOCS
 //* https://developer.themoviedb.org/docs
 
@@ -23,7 +21,24 @@ export const tmdbApi = createApi({
 
         //* Get Movies by [Type]
         getMovies: builder.query({
-            query: () => `movie/popular?page=${page}&api_key=${tmdbApiKey}`,
+            query: ({genreIdOrCategoryName, page, searchQuery}) => {
+
+                // Get Movies by Search
+                if (searchQuery) {
+                    return `/search/movie?query=${searchQuery}&page=${page}&api_key=${tmdbApiKey}`
+                }
+                // Get Movies by Category
+                if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'string') {
+                    return `movie/${genreIdOrCategoryName}?page=${page}&api_key=${tmdbApiKey}`
+                }
+                // Get Movies by Genre
+                if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'number') {
+                    return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${tmdbApiKey}`
+                }
+
+                // Get Popular Movies
+                return `movie/popular?page=${page}&api_key=${tmdbApiKey}`
+            }
         })
     })
 

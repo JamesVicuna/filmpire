@@ -2,8 +2,10 @@ import React, {useEffect} from 'react'
 import { Divider, List, ListItem, ListItemButton, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useTheme } from '@mui/styles'
-import useStyles from './styles'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { selectGenreOrCategory } from '../../features/currentGenreOrCategory'
+import useStyles from './styles'
 import genres from '../../assets/genres'
 import { useGetGenresQuery } from '../../services/TMDB'
 
@@ -17,10 +19,13 @@ const categories = [
 ]
 
 const Sidebar = ({setMobileOpen}) => {
+    const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory)
     const theme = useTheme();
     const classes = useStyles();
     const {data, isFetching} = useGetGenresQuery();
+    const dispatch = useDispatch();
 
+    console.log(genreIdOrCategoryName)
 
     return (
     <>
@@ -39,9 +44,9 @@ const Sidebar = ({setMobileOpen}) => {
             <ListSubheader>Categories</ListSubheader>
             {categories.map(( {label, value}) => (
                 <Link key={value} className={classes.links} to='/'>
-                    <ListItem onClick={() => {}}>
+                    <ListItem>
                     {/* MAY NEED TO MOVE THE ONCLICK EVENT TO LISTITEMBUTTON IF NOT WORKING PROPERLY HEHEXD IM A LITTLE SILLY */}
-                        <ListItemButton>
+                        <ListItemButton onClick={() => dispatch(selectGenreOrCategory(value))}>
                             <ListItemIcon>
                                 <img src={genres[label.toLowerCase()]} className={classes.genreImages} height={30} />
                             </ListItemIcon>
@@ -63,9 +68,8 @@ const Sidebar = ({setMobileOpen}) => {
                 </Box>
             ) : data.genres.map(( {name, id}) => (
                 <Link key={name} className={classes.links} to='/'>
-                    <ListItem onClick={() => {}}>
-                    {/* MAY NEED TO MOVE THE ONCLICK EVENT TO LISTITEMBUTTON IF NOT WORKING PROPERLY */}
-                        <ListItemButton>
+                    <ListItem>
+                        <ListItemButton onClick={() => dispatch(selectGenreOrCategory(id))}>
                             <ListItemIcon>
                                 <img src={genres[name.toLowerCase()]} className={classes.genreImages} height={30} />
                             </ListItemIcon>

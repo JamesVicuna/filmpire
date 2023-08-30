@@ -4,7 +4,7 @@ import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-materi
 import { Link } from 'react-router-dom';
 import useStyles from './styles'
 import { useTheme } from '@mui/material/styles';
-import { Sidebar } from '..'
+import { Sidebar, Search } from '..'
 
 const NavBar = () => {
   const classes = useStyles();
@@ -18,7 +18,7 @@ const NavBar = () => {
       <AppBar position='fixed'>
         <Toolbar className={classes.toolbar}>
           {isMobile && (
-            // Mobile - Menu Button
+            //* Mobile - Menu Button
             <IconButton 
               color='inherit'
               edge='start'
@@ -26,12 +26,12 @@ const NavBar = () => {
               onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               className={classes.menuButton}
             >
-            {/* Mobile - Menu */}
+            {/* //* Mobile - Menu */}
               <Menu />
             </IconButton>
           )}
 
-          {/* Dark / Light Mode Button */}
+          {/* //* Dark / Light Mode Button */}
           <IconButton
             color='inherit'
             sx={{ ml: 1}}
@@ -41,18 +41,18 @@ const NavBar = () => {
             
           </IconButton>
 
-          {/* Web Search Bar */}
-          {!isMobile && 'Search...'}
+          {/* //*TODO Web Search Bar */}
+          {!isMobile && <Search /> }
 
-          {/* Login / Profile Buttons */}
+          {/* //* Login / Profile Buttons */}
           <div>
             {!isAuthenticated ? (
-              // Login Button 
+              //* Login Button 
               <Button color='inherit' onClick={() => {}}>
                 Login &nbsp; <AccountCircle />
               </Button>
             ): (
-               // Profile Button
+               //* Profile Button
               <Button 
                 color='inherit' 
                 component={Link} 
@@ -61,7 +61,7 @@ const NavBar = () => {
                 onClick={() => {}}
               >
                 {!isMobile && <>My Movies &nbsp;</>}
-                {/* User Avatar */}
+                {/* //* User Avatar */}
                 <Avatar 
                   style={{width: 30, 
                   height: 30}} 
@@ -70,14 +70,16 @@ const NavBar = () => {
               </Button>
             )}
           </div>
-          {isMobile && 'Search...'}
+
+          {/* //*TODO Mobile Search Bar */}
+          {isMobile && <Search /> }
         </Toolbar>
       </AppBar>
       <div>
         <nav className={classes.drawer}>
           {isMobile 
           ? (
-            // Mobile Drawer
+            //* Mobile Drawer
             <Drawer 
               variant='temporary'
               anchor='left'
@@ -89,7 +91,7 @@ const NavBar = () => {
               <Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           ): (
-            // Web Drawer
+            //* Web Drawer
             <Drawer 
               classes={{paper: classes.drawerPaper}} 
               className={classes.test} 
