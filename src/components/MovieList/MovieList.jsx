@@ -4,7 +4,7 @@ import { Movie } from '..'
 
 import useStyles from './styles'
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, numberOfMovies }) => {
 
   const classes = useStyles();
 
@@ -13,7 +13,7 @@ const MovieList = ({ movies }) => {
       container 
       className={classes.movieContainer}
     >
-      {movies.results.map((movie, index) => (
+      {movies.results.slice(0, numberOfMovies).map((movie, index) => (
         <Movie 
           key={index} 
           movie={movie} 

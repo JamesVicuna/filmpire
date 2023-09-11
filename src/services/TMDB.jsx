@@ -1,10 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const tmdbApiKey = import.meta.env.VITE_REACT_APP_TMDB_KEY;
-// using VITE - have to use import.meta.env to access .env file 
-// TO ACCESS ENV FILE :
-//      createReactApp - process.env 
-//      VITE - improt.meta.env
 
 // API DOCS
 //* https://developer.themoviedb.org/docs
@@ -39,6 +35,17 @@ export const tmdbApi = createApi({
                 // Get Popular Movies
                 return `movie/popular?page=${page}&api_key=${tmdbApiKey}`
             }
+        }),
+
+        //* Get Movie
+
+        getMovie: builder.query({
+            query: (id) => `/movie/${id}?append_to_response=videos,credits&api_key=${tmdbApiKey}`
+        }),
+
+        //* Get User Specific List
+        getRecommendations: builder.query({
+            query: ({movie_id, list}) => `/movie/${movie_id}/${list}?api_key=${tmdbApiKey}`
         })
     })
 
@@ -47,4 +54,6 @@ export const tmdbApi = createApi({
 export const {
     useGetMoviesQuery,
     useGetGenresQuery,
+    useGetMovieQuery,
+    useGetRecommendationsQuery,
 } = tmdbApi;

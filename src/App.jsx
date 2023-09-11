@@ -15,7 +15,10 @@ function App() {
       <main className={classes.content}>
         <div className={classes.toolbar}/>
         <Routes>
-          <Route path="/" element={<Movies />} />
+          <Route excat path="/" element={<Movies />} />
+          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/movie/:id" element={<MovieInformation />} />
+          
         </Routes>
       </main>
     </div>

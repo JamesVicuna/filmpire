@@ -26,7 +26,7 @@ const Movie = ({ movie, index }) => {
                   className={classes.title} 
                   variant='h5'
                 >
-                  {movie.title}
+                  {movie.title} and test
                 </Typography>
                 {/* Movie Rating */}
                 <Tooltip 

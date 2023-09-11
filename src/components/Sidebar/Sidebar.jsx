@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory'
 import useStyles from './styles'
-import genres from '../../assets/genres'
+import genreIcons from '../../assets/genres'
 import { useGetGenresQuery } from '../../services/TMDB'
 
 const redLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
@@ -24,8 +24,6 @@ const Sidebar = ({setMobileOpen}) => {
     const classes = useStyles();
     const {data, isFetching} = useGetGenresQuery();
     const dispatch = useDispatch();
-
-    console.log(genreIdOrCategoryName)
 
     return (
     <>
@@ -48,7 +46,7 @@ const Sidebar = ({setMobileOpen}) => {
                     {/* MAY NEED TO MOVE THE ONCLICK EVENT TO LISTITEMBUTTON IF NOT WORKING PROPERLY HEHEXD IM A LITTLE SILLY */}
                         <ListItemButton onClick={() => dispatch(selectGenreOrCategory(value))}>
                             <ListItemIcon>
-                                <img src={genres[label.toLowerCase()]} className={classes.genreImages} height={30} />
+                                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
                             </ListItemIcon>
                             <ListItemText primary={label} />
                         </ListItemButton>
@@ -71,7 +69,7 @@ const Sidebar = ({setMobileOpen}) => {
                     <ListItem>
                         <ListItemButton onClick={() => dispatch(selectGenreOrCategory(id))}>
                             <ListItemIcon>
-                                <img src={genres[name.toLowerCase()]} className={classes.genreImages} height={30} />
+                                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
                             </ListItemIcon>
                             <ListItemText primary={name} />
                         </ListItemButton>
